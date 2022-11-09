@@ -3,11 +3,16 @@ import Foundation
 class GameScreenViewModel: ObservableObject {
   
   @Published var game: Game = Game()
+  
   @Published var user: User = User()
+  
   @Published var comp: Comp = Comp()
   
   func start() {
-    if game.gameIsRunning == false {game.gameIsRunning.toggle()}
+    if game.gameIsRunning != true {
+      game.gameIsRunning.toggle()
+    }
+    stepComp()
   }
   
   func stepComp() {
@@ -60,6 +65,9 @@ class GameScreenViewModel: ObservableObject {
     } else {
       game.message = game.messages[3]
     }
+    game.stepsComp = 0
+    game.stepsUser = 0
     game.gameIsRunning = false
+    game.showEndRounde = true
   }
 }
