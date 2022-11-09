@@ -4,7 +4,9 @@ struct GameScreen: View {
   
   @StateObject var viewModel: GameScreenViewModel = GameScreenViewModel()
   
-  @State var yourNumber = ""
+  @State var yourNumber    = ""
+  
+  @State var youMystNumber = ""
   
   var body: some View {
     VStack {
@@ -45,10 +47,13 @@ struct GameScreen: View {
           }
           HStack {
             TextField("Your estimated number", text: $yourNumber)
+              .foregroundColor(.black)
+              .background(.gray)
+              .padding(20)
           }
           HStack {
             Button {
-              viewModel.user.estimatedNum = Int(yourNumber) ?? 0
+              viewModel.user.estimatedNum = Int(yourNumber) ?? 1
               viewModel.stepUser()
             } label: {
               Text("Next step")
@@ -60,10 +65,22 @@ struct GameScreen: View {
           Text("User score: \(viewModel.game.scoreUser)")
           Text("Comp score: \(viewModel.game.scoreComp)")
         }
+        HStack {
+          TextField("Enter your mysterious number", text: $youMystNumber)
+            .foregroundColor(.black)
+            .background(.gray)
+            .padding(20)
+        }
         Button {
+          viewModel.user.mysteriousNum = Int(youMystNumber) ?? 1
           viewModel.start()
         } label: {
           Text("Start game")
+        }
+        .alert(isPresented: $viewModel.game.showEndRounde) {
+          Alert(
+            title: Text("Round ended")
+          )
         }
       }
     }
