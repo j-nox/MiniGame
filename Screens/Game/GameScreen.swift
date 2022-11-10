@@ -14,6 +14,7 @@ struct GameScreen: View {
         if viewModel.game.currentPlayer == .user {
           HStack {
             Text("Played \(viewModel.user.name) vs \(viewModel.comp.name)")
+              .font(.system(size: 30))
           }
           HStack {
             Text("Your Myst. number \(viewModel.user.mysteriousNum)")
@@ -25,7 +26,9 @@ struct GameScreen: View {
             Text("\(viewModel.comp.name) said \(viewModel.comp.estimatedNum)")
           }
           HStack {
-            Text("Message \(viewModel.game.message)")
+            Text("Message: \(viewModel.game.message)")
+              .font(.system(size: 20))
+              .foregroundColor(.red)
           }
           Button {
             viewModel.stepComp()
@@ -35,12 +38,15 @@ struct GameScreen: View {
         } else {
           HStack {
             Text("Played \(viewModel.comp.name) vs \(viewModel.user.name)")
+              .font(.system(size: 30))
           }
           HStack {
             Text("Your steps \(viewModel.game.stepsUser)")
           }
           HStack {
             Text("Message \(viewModel.game.message)")
+              .font(.system(size: 20))
+              .foregroundColor(.red)
           }
           HStack {
             Text("Myst. \(viewModel.comp.mysteriousNumber)")
